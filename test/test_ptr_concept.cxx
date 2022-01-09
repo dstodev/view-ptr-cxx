@@ -18,6 +18,9 @@ struct empty_t {};
 struct get_t {
 	void get();
 };
+struct return_t {
+	int* not_get();
+};
 struct all_t {
 	int* get();
 };
@@ -30,6 +33,12 @@ TEST(ViewPtr, helper_select_fails_empty_struct) {
 
 TEST(ViewPtr, helper_select_fails_struct_with_get_but_incorrect_return) {
 	get_t t;
+
+	ASSERT_STREQ("fail", Select(t));
+}
+
+TEST(ViewPtr, helper_select_fails_struct_with_incorrect_function_with_correct_return) {
+	return_t t;
 
 	ASSERT_STREQ("fail", Select(t));
 }
