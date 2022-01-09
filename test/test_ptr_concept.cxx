@@ -4,14 +4,13 @@
 
 #include <ptr_concept.hxx>
 
-
 template <typename T = void>
-const char* Select(T ptr) {
+static const char* Select(T&) {
 	return "fail";
 }
 
 template <ptr_t<int> T>
-const char* Select(T ptr) {
+static const char* Select(T&) {
 	return "pass";
 }
 
@@ -45,7 +44,7 @@ TEST(ViewPtr, helper_select_passes_struct_with_get_returning_intptr) {
 TEST(ViewPtr, selects_unique_ptr) {
 	std::unique_ptr<int> ptr;
 
-	ASSERT_STREQ("pass", Select(std::move(ptr)));
+	ASSERT_STREQ("pass", Select(ptr));
 }
 
 TEST(ViewPtr, selects_shared_ptr) {

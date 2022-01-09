@@ -8,8 +8,10 @@ class view_ptr {
 public:
 	typedef T element_type;
 
-	template <ptr_t<T> U>
+	template <ptr_t<element_type> U>
 	view_ptr(U ptr);
+
+
 };
 
 #endif
